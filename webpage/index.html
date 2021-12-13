@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<head>
+    <title>3D Mass-Spring Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> <!--from freecodecamp.org-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $(function () {
+        $(document).scroll(function () {
+            var $nav = $(".navbar");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        });
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <nav class="navbar navbar-expand-lg fixed-top " id="navigationbar">
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link " data-value="resume" href="">CSCE 489 Final Project - Rebecca McFadden</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</head>
+
+<body>
+    <div class="overlay" style="padding-top: 5%; background-color: rgb(0, 102, 128);">
+        <div class="backdrop" style="margin-bottom: 30px; width: 80%; margin-left: 10%; padding: 5%; background-position: center;">
+            <div class="container" style=" height: fit-content;">
+                <h1>3D Mass-Spring Simulation - Rebecca McFadden</h1>
+                <div class="aligned">
+                    <video height="320px" controls>
+                        <source src="images/slimeFinal.mp4" type=video/mp4>
+                    </video>
+                    <div style="padding: 30px;">
+                        <h3>Overview</h3>
+                        <p>
+                            For my final project, I created a realistic Minecraft Slime using a 3D Mass-Spring simulation. This is an extension
+                            of the cloth simulation from Assignment 5. I used textures from the publicly available Minecraft resource pack and
+                            proceduraly generated the cube mesh.
+                        </p>
+                        <p>
+                            The outer cube was rendered by generating triangles connecting all outer particles, computing the normals per triangle,
+                            and interpolating the texture coordinates based on the distance to each face's corners. The inner cube uses the same 
+                            method, just with an inner cube of particles and a different set of interpolated texture coordinates. The particles are 
+                            rendered as a generic cube mesh with the same texture as the outer cube of the slime.
+                        </p>
+                    </div>
+                </div>
+                <h3>Simulating the Slime</h3>                    
+                <p>
+                    I started this project by converting the Assignment 5 cloth to be a 3D lattice of mass particles connected by structural,
+                    bending, and shear springs, each with a different stiffness. The springs connecting the outer part of the slime are less stiff than the
+                    inner springs to allow the outer layer to be more "jiggly". I then simulated the forces on each particle at every time step
+                    using the same Implicit Integration method as in A5. I apply an upward collision force if the slime collides with the floor using
+                    the same formula as with the sphere and the cloth but with the normal being <code>(0, 1, 0)</code>. The same collision principles apply to 
+                    the four walls of the bounding box. 
+                </p>
+                <br>
+                <h3>Extra Features</h3>                  
+                <p>
+                    To allow the slime to jump and move with <code>w a s d</code>, I calculated a face normal vector using the positions of the corner particles for
+                     each face. I then apply a force to all of the particles in the direction of the corresponding face normal on keypress. One thing I noticed when 
+                     testing this was that the result of a jump or move looked much cleaner if the force was applied across a few time steps, so I implemented a way to
+                     distribute this force across 4 successive <code>update()</code> calls. The extra particles are spawned at collision locations with a likelihood of 
+                     20% if the velocity magnitude of that particle exceeds a given threshold. 
+                </p>
+                <figure align="center">
+                    <p align="center">
+                    <img src="images/frame_00_delay-0.14s.png" height="100"/>
+                    <img src="images/frame_02_delay-0.14s.png" height="100"/>
+                    <img src="images/frame_04_delay-0.14s.png" height="100"/>
+                    <img src="images/frame_05_delay-0.15s.png" height="100"/>
+                    <img src="images/frame_07_delay-0.14s.png" height="100"/>
+                    </p> 
+                    <figcaption><p align="center">Jumping sequence for the slime</p></figcaption>
+                </figure>  
+                <h3>Challenges</h3>                  
+                <p>
+                    One challenge I experienced was that the slime had a tendency to collapse if the collision forces were too great or if it landed on a corner or edge.
+                    To counteract this, I added bending springs with a higher stiffness connecting the eight outer corners of the slime. This somewhat (but not entirely) 
+                    reduced the frequency of collapses, so I attempted to add shear springs to the corners as well. Both of these methods were mildly successful at preventing
+                    or reducing collapse, but produced a tent-like artifact at the top of the slime when it collided with the ground that I didn't particularly like. To fix 
+                    this issue, I tried just applying the edge springs on a keypress to "quick fix" the slime. This ended up exploding the simulation. I settled on a mix of the 
+                    three methods, applying a less stiff edge bending spring at every time step and really stiff shear springs on a keypress, which yielded better results.
+                </p>
+                    <div class="images-container">
+                        <figure align="center">
+                            <img src="images/collapsed.gif" width="250"/>
+                            <figcaption><p align="center" style="font-size: small;">Collapse</p></figcaption>
+                        </figure>  
+                        <figure align="center">
+                            <img src="images/cwithedgesprings.gif" width="250"/>
+                            <figcaption><p align="center" style="font-size: small;">Edge bend springs</p></figcaption>
+                        </figure>  
+                        <figure align="center">
+                            <img src="images/cwithedgeshearsprings.gif" width="250"/>
+                            <figcaption><p align="center" style="font-size: small;">Bend and shear springs</p></figcaption>
+                        </figure>  
+                        <figure align="center">
+                            <img src="images/explode.gif" width="250"/>
+                            <figcaption><p align="center" style="font-size: small;">Simulation explosion</p></figcaption>
+                        </figure>  
+                    </div> 
+            </div>
+        </div>
+    </div>
+</body>

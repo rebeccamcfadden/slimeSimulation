@@ -1,0 +1,328 @@
+body {
+	overflow-y: scroll;
+	font-family: 'Montserrat', sans-serif;
+	background-color: rgb(33, 66, 75);
+}
+
+.aligned {
+	display: flex;
+	align-items: top;
+}
+
+html {
+	font-family: 'Montserrat', sans-serif;
+}
+.navbar {
+		font-family: 'Montserrat', sans-serif;
+		background-color: none;
+		height: fit-content;
+}
+.navbar.scrolled {
+	background-color: rgba(0, 102, 128, .6) !important;
+	transition: background-color 200ms linear;
+	-webkit-box-shadow: 0 8px 6px -6px rgba(81, 82, 85, 0.7);;
+		-moz-box-shadow: 0 8px 6px -6px rgba(81, 82, 85, 0.7);;
+		box-shadow: 0 8px 6px -6px rgba(81, 82, 85, 0.7);
+}
+.nav-link , .navbar-brand {
+		color: white;
+}
+.nav-link {
+		margin-right: 1em !important;
+}
+.nav-link:hover {
+		color: rgb(253, 194, 205);
+}
+.navbar-brand:hover {
+		color: rgb(253, 194, 205);
+}
+.navbar.colored {
+		background-color: rgba(0, 102, 128, .6) !important;
+		-webkit-box-shadow: 0 8px 6px -6px rgba(81, 82, 85, 0.7);;
+		-moz-box-shadow: 0 8px 6px -6px rgba(81, 82, 85, 0.7);;
+		box-shadow: 0 8px 6px -6px rgba(81, 82, 85, 0.7);
+}
+.header {
+		background-image: url("../images/beach.jpg");
+		background-attachment: scroll;
+		background-size: cover;
+		background-position: center;
+		position: sticky;
+		top: 0;
+}
+.overlay {
+		background-color: rgba(255, 255, 255, 0.315);
+		position: absolute;
+		min-height: 100%;
+		min-width: 100%;
+		padding-top: 60px !important;
+		left: 0;
+		top: 0;
+}
+.description{
+		position: absolute;
+		top: 25%;
+		margin: auto;
+		padding: 2em;
+		font-family: 'Montserrat', sans-serif;
+		text-shadow: 0 2px 3px rgba(194, 238, 255, 0.678);
+}
+.description h1{
+		font-size: 60px;
+		color: black;
+		font-weight: 250;
+}
+.description h6{
+ color: rgb(0, 71, 88);
+ font-size: 30px;
+ font-weight: 100;
+ width: 60%;
+ line-height: 1.5;
+}
+.bottompanel {
+	top: 95%;
+	position: relative;
+	background-color: rgb(33, 66, 75);
+	margin: 4em 0;
+	padding: 2em;
+	margin-bottom: 0;
+}
+.backdrop {
+	background-color: white;
+	position: relative;
+	overflow-y: hidden;
+	border-radius: 0.5%;
+	margin: 4%;
+	margin-top: 1%;
+	padding: 1%;
+	padding-top: 1%;
+	-webkit-box-shadow: 0 12px 8px -8px rgba(81, 82, 85, 0.7);;
+	-moz-box-shadow: 0 12px 8px -8px rgba(81, 82, 85, 0.7);;
+	box-shadow: 0 12px 8px -8px rgba(81, 82, 85, 0.7);
+}
+.about p{
+	font-size: 14pt;
+}
+.about h3 {
+	font-size: 32px;
+}
+.arrow-nav {
+	position: fixed;
+	left: 50%;
+	top: 90%;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+	color: white;
+}
+.arrow-nav:hover {
+	color: teal;
+}
+#page-container {
+	position: relative;
+	display: none;
+	min-height: 100vh;
+}
+.timeline{
+	position:relative
+}
+.timeline:before{
+	content:" ";
+	width:5px;
+	height:100%;
+	border-radius:20px;
+	margin:0 auto;
+	background:#242922;
+	position:absolute;
+	top:0;
+	left:0;
+	right:0
+}
+
+.images-container {
+	display: flex;
+	justify-content: center;
+}
+.images-container img{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.tcontainer{
+	display:inline-block;
+	margin-bottom:20px;
+	position:relative;
+	width: 100%;
+}
+.t-content::before {
+	content: " ";
+	height: 0;
+	position: absolute;
+	top: 65px;
+	width: 0;
+	z-index: 1;
+	right: 100%;
+	border: medium solid rgb(253, 194, 205);
+	border-width: 10px 10px 10px 0;
+	border-color: transparent rgb(253, 194, 205) transparent transparent;
+}
+.left .t-content::before{
+	left: 100%;
+	border-width: 10px 0 10px 10px;
+	border-color: transparent transparent transparent rgb(253, 194, 205);
+}
+.t-icon{
+	display:inline-block;
+	width:130px;
+	height:130px;
+	border-radius:50%;
+	border:3px solid rgb(253, 194, 205);
+	padding:13px;
+	text-align:center;
+	position:absolute;
+	top: 5%;
+	right: 52%;
+}
+.left .t-icon{
+	left: 52%;
+}
+.content-img{
+	height: 100%;
+	width: 100%;
+	object-position: center;
+	border-radius: 50%;
+}
+.content-img:hover{
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+}
+.t-content{
+	width:50%;
+	margin: 0 -20px;
+	float: right  ;
+	position: relative;
+	border: thin solid black;
+	border-width: 0.5px .5px 3px 0.5px;
+	border-color: rgb(253, 194, 205);
+	border-radius: 3%;
+	-webkit-box-shadow: 0 12px 8px -8px rgba(81, 82, 85, 0.7);
+	-moz-box-shadow: 0 12px 8px -8px rgba(81, 82, 85, 0.7);
+	box-shadow: 0 12px 8px -8px rgba(81, 82, 85, 0.7);
+}
+.left .t-content{
+	float: left  ;
+}
+.content-body {
+	padding:8px 30px;
+}
+.content-body p{
+	margin: 0;
+}
+.content-footer {
+	width: 100%;
+}
+
+.wrapper {
+	height: 450px; 
+	overflow-y: scroll;
+}
+.wrapper p a{
+	color: #3B5998 !important;
+}
+
+::marker {
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+    text-indent: 0px !important;
+    text-align: start !important;
+    text-align-last: start !important;
+}
+
+@media only screen and (max-width: 900px){
+	h1 {
+		font-size: 30px;
+	}
+	h2 {
+		font-size: 24px;
+	}
+	h3 {
+		font-size: 18px;
+	}
+	h5 {
+		font-size: 12px;
+		font-size: smaller;
+	}
+	.description h6 {
+		font-size: 18px !important;
+	}
+	.description h1 {
+		font-size: 36px;
+	}
+	p {
+		font-size: 12px;
+	}
+	.about p {
+		font-size: 14px;;
+	}
+	ul, li {
+		font-size: 12px;
+	}
+	.description{
+		top: 15%;
+	}
+	.nav-link{
+		font-size: 14px;
+	}
+	.backdrop {
+		overflow-y: visible;
+		height: fit-content;
+	}
+	.wrapper {
+		overflow-y: visible;
+		height: fit-content;
+	}
+	.timeline:before {
+		left: -40%;
+	}
+	.t-icon{
+		right: 75%;
+		width: 90px;
+		height:90px;
+		padding: 8px;
+	}
+	.left .t-icon {
+		left: auto;
+	}
+	.t-content{
+		width: 70%;
+	}
+	.t-content .content-body{
+		font-size: smaller;
+		padding: 8px 15px;
+	}
+	.t-content .content-body h3 {
+		font-size: 12pt;
+	}
+	.t-content .content-body h6{
+		font-size: 10pt;
+	}
+	.t-content .content-body p {
+		font-size: 8pt;
+	}
+	.left .t-content {
+		float: right  ;
+
+	}
+	.t-content::before {
+		top: 45px;
+	}
+	.left .t-content::before {
+		right: 100%;
+		left: auto;
+		border-width: 10px 10px 10px 0;
+		border-color: transparent rgb(253, 194, 205) transparent transparent;
+	}
+}
